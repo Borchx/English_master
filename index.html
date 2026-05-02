@@ -339,6 +339,53 @@
             display: none !important;
         }
 
+        .block-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 6px;
+            background: white;
+            border: 1.5px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .block-checkbox:hover {
+            background: #F8FAFB;
+            border-color: var(--primary);
+        }
+
+        .block-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .block-checkbox.checked {
+            background: #E6F1FB;
+            border-color: var(--primary);
+        }
+
+        .block-label {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .block-topic {
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .block-count {
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
         .difficulty-selector {
             display: flex;
             gap: 8px;
@@ -446,10 +493,40 @@
                 </div>
 
                 <div class="card">
-                    <h2>¿Qué quieres practicar?</h2>
-                    <button class="btn" onclick="startPractice('grammar')">📚 Gramática</button>
-                    <button class="btn btn-secondary" onclick="startPractice('vocabulary')">💬 Vocabulario</button>
-                    <button class="btn btn-secondary" onclick="startPractice('mixed')">🎲 Mixto</button>
+                    <h2>Tipo de práctica</h2>
+                    <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                        <button class="diff-btn selected" style="flex: 1;" data-type="quick" onclick="selectPracticeType('quick')">
+                            ⚡ Rápida<br><span style="font-size: 11px; opacity: 0.7;">Ejercicios mixtos</span>
+                        </button>
+                        <button class="diff-btn" style="flex: 1;" data-type="custom" onclick="selectPracticeType('custom')">
+                            🎯 Personalizada<br><span style="font-size: 11px; opacity: 0.7;">Elige bloques</span>
+                        </button>
+                    </div>
+                    
+                    <div id="quick-practice">
+                        <button class="btn" onclick="startPractice('grammar')">📚 Gramática</button>
+                        <button class="btn btn-secondary" onclick="startPractice('vocabulary')">💬 Vocabulario</button>
+                        <button class="btn btn-secondary" onclick="startPractice('mixed')">🎲 Mixto</button>
+                    </div>
+
+                    <div id="custom-practice" class="hidden">
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px;">📚 Bloques de Gramática</label>
+                            <div id="grammar-blocks" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 8px;"></div>
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px;">💬 Bloques de Vocabulario</label>
+                            <div id="vocabulary-blocks" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--border); border-radius: 8px; padding: 8px;"></div>
+                        </div>
+
+                        <button class="btn" onclick="startCustomPractice()" id="start-custom-btn" disabled>
+                            Comenzar práctica personalizada
+                        </button>
+                        <p style="font-size: 12px; color: var(--text-secondary); margin-top: 8px; text-align: center;">
+                            Selecciona al menos un bloque
+                        </p>
+                    </div>
                 </div>
             </div>
 

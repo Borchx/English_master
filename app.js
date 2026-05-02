@@ -1,233 +1,557 @@
-// Database de gramática y vocabulario
+// Database de gramática y vocabulario organizados por bloques
 const grammarDB = {
-    A1: [
-        {
-            topic: 'Present Simple',
-            question: 'Completa: She ___ (work) every day.',
-            answer: 'works',
-            options: ['work', 'works', 'working', 'worked'],
-            explanation: 'En tercera persona singular (he/she/it) añadimos -s al verbo en Present Simple.'
-        },
-        {
-            topic: 'To be',
-            question: 'Completa: I ___ a student.',
-            answer: 'am',
-            options: ['am', 'is', 'are', 'be'],
-            explanation: 'Con "I" siempre usamos "am".'
-        },
-        {
-            topic: 'Present Simple - Negative',
-            question: 'Completa: They ___ like coffee.',
-            answer: "don't",
-            options: ["don't", "doesn't", "not", "aren't"],
-            explanation: 'Para formar la negación en Present Simple con I/you/we/they usamos "don\'t".'
-        },
-        {
-            topic: 'Articles',
-            question: 'Completa: I have ___ apple.',
-            answer: 'an',
-            options: ['a', 'an', 'the', '-'],
-            explanation: 'Usamos "an" antes de palabras que empiezan con sonido vocal.'
-        },
-        {
-            topic: 'Plural',
-            question: '¿Cuál es el plural de "child"?',
-            answer: 'children',
-            options: ['childs', 'children', 'childes', 'child'],
-            explanation: 'Child es un sustantivo irregular, su plural es "children".'
-        }
-    ],
-    A2: [
-        {
-            topic: 'Past Simple',
-            question: 'Completa: Yesterday I ___ (go) to the cinema.',
-            answer: 'went',
-            options: ['go', 'goes', 'went', 'going'],
-            explanation: '"Go" es irregular, su pasado es "went".'
-        },
-        {
-            topic: 'Future - Going to',
-            question: 'Completa: I ___ study tonight.',
-            answer: "am going to",
-            options: ['am going to', 'will', 'going to', 'go to'],
-            explanation: 'Usamos "am/is/are going to" para planes decididos.'
-        },
-        {
-            topic: 'Comparative',
-            question: 'Completa: This book is ___ than that one.',
-            answer: 'better',
-            options: ['good', 'better', 'best', 'more good'],
-            explanation: '"Good" es irregular: good → better → best.'
-        },
-        {
-            topic: 'Can/Could',
-            question: 'Completa: ___ you help me?',
-            answer: 'Could',
-            options: ['Could', 'Can', 'Should', 'Would'],
-            explanation: 'Ambos son correctos, pero "Could" es más formal y educado.'
-        },
-        {
-            topic: 'Past Continuous',
-            question: 'Completa: I ___ (read) when you called.',
-            answer: 'was reading',
-            options: ['read', 'was reading', 'am reading', 'have read'],
-            explanation: 'Past Continuous: was/were + verbo-ing para acciones en progreso en el pasado.'
-        }
-    ],
-    B1: [
-        {
-            topic: 'Present Perfect',
-            question: 'Completa: I ___ (visit) Paris three times.',
-            answer: 'have visited',
-            options: ['visited', 'have visited', 'visit', 'am visiting'],
-            explanation: 'Present Perfect: have/has + participio pasado. Se usa para experiencias sin tiempo específico.'
-        },
-        {
-            topic: 'Passive Voice',
-            question: 'Completa: The book ___ (write) in 1990.',
-            answer: 'was written',
-            options: ['wrote', 'was written', 'is written', 'has written'],
-            explanation: 'Pasiva en pasado: was/were + participio pasado.'
-        },
-        {
-            topic: 'Conditionals - Type 1',
-            question: 'Completa: If it ___ (rain), I will stay home.',
-            answer: 'rains',
-            options: ['rain', 'rains', 'will rain', 'rained'],
-            explanation: 'Condicional tipo 1: If + presente simple, ... will + infinitivo.'
-        },
-        {
-            topic: 'Reported Speech',
-            question: 'He said, "I am tired". → He said he ___ tired.',
-            answer: 'was',
-            options: ['is', 'was', 'were', 'am'],
-            explanation: 'En estilo indirecto, presente → pasado: am → was.'
-        },
-        {
-            topic: 'Relative Clauses',
-            question: 'The man ___ lives here is my uncle.',
-            answer: 'who',
-            options: ['who', 'which', 'where', 'what'],
-            explanation: 'Usamos "who" para personas en oraciones de relativo.'
-        }
-    ],
-    B2: [
-        {
-            topic: 'Past Perfect',
-            question: 'When I arrived, they ___ already ___ (leave).',
-            answer: 'had left',
-            options: ['left', 'have left', 'had left', 'were leaving'],
-            explanation: 'Past Perfect: had + participio. Acción pasada antes de otra acción pasada.'
-        },
-        {
-            topic: 'Modal Perfects',
-            question: 'He ___ have studied harder (crítica al pasado).',
-            answer: 'should',
-            options: ['should', 'must', 'can', 'will'],
-            explanation: 'Should have + participio = crítica o consejo sobre el pasado.'
-        },
-        {
-            topic: 'Conditionals - Type 3',
-            question: 'If I ___ (know), I would have told you.',
-            answer: 'had known',
-            options: ['knew', 'had known', 'know', 'have known'],
-            explanation: 'Condicional tipo 3: If + past perfect, ... would have + participio.'
-        },
-        {
-            topic: 'Wish + Past',
-            question: 'I wish I ___ (can) speak French.',
-            answer: 'could',
-            options: ['can', 'could', 'will', 'would'],
-            explanation: 'Wish + pasado simple para deseos sobre el presente. Can → could.'
-        },
-        {
-            topic: 'Passive - Advanced',
-            question: 'The car needs ___ (repair).',
-            answer: 'repairing',
-            options: ['repair', 'repairing', 'to repair', 'repaired'],
-            explanation: 'Need + -ing tiene significado pasivo.'
-        }
-    ],
-    C1: [
-        {
-            topic: 'Inversion',
-            question: '___ have I seen such a beautiful view.',
-            answer: 'Never',
-            options: ['Never', 'Not', 'No', 'Neither'],
-            explanation: 'Después de palabras negativas usamos inversión (verbo + sujeto).'
-        },
-        {
-            topic: 'Subjunctive',
-            question: 'It is essential that he ___ present.',
-            answer: 'be',
-            options: ['is', 'be', 'was', 'were'],
-            explanation: 'En inglés formal, después de "essential/vital/important that" usamos subjuntivo (be).'
-        },
-        {
-            topic: 'Mixed Conditionals',
-            question: 'If I had studied harder (past), I ___ be a doctor now (present).',
-            answer: 'would',
-            options: ['will', 'would', 'had', 'have'],
-            explanation: 'Condicional mixto: pasado → presente. If + past perfect, ... would + infinitivo.'
-        },
-        {
-            topic: 'Cleft Sentences',
-            question: '___ I need is some rest.',
-            answer: 'What',
-            options: ['What', 'That', 'Which', 'Who'],
-            explanation: 'Cleft sentence para énfasis: "What I need" = "The thing that I need".'
-        },
-        {
-            topic: 'Participle Clauses',
-            question: '___ (finish) my work, I went home.',
-            answer: 'Having finished',
-            options: ['Finishing', 'Having finished', 'Finished', 'To finish'],
-            explanation: 'Having + participio indica una acción completada antes de otra.'
-        }
-    ]
+    A1: {
+        blocks: [
+            {
+                name: "Present Simple",
+                exercises: [
+                    {
+                        topic: 'Present Simple - Affirmative',
+                        question: 'Completa: She ___ (work) every day.',
+                        answer: 'works',
+                        options: ['work', 'works', 'working', 'worked'],
+                        explanation: 'En tercera persona singular (he/she/it) añadimos -s al verbo en Present Simple.'
+                    },
+                    {
+                        topic: 'Present Simple - Negative',
+                        question: 'Completa: They ___ like coffee.',
+                        answer: "don't",
+                        options: ["don't", "doesn't", "not", "aren't"],
+                        explanation: 'Para formar la negación en Present Simple con I/you/we/they usamos "don\'t".'
+                    },
+                    {
+                        topic: 'Present Simple - Questions',
+                        question: 'Completa: ___ you speak English?',
+                        answer: 'Do',
+                        options: ['Do', 'Does', 'Are', 'Is'],
+                        explanation: 'Usamos "Do" con I/you/we/they para hacer preguntas en Present Simple.'
+                    }
+                ]
+            },
+            {
+                name: "Verbo To Be",
+                exercises: [
+                    {
+                        topic: 'To be - Present',
+                        question: 'Completa: I ___ a student.',
+                        answer: 'am',
+                        options: ['am', 'is', 'are', 'be'],
+                        explanation: 'Con "I" siempre usamos "am".'
+                    },
+                    {
+                        topic: 'To be - Negative',
+                        question: 'Completa: She ___ at home.',
+                        answer: "isn't",
+                        options: ["isn't", "aren't", "not is", "don't"],
+                        explanation: 'Negativo de "is" es "isn\'t" o "is not".'
+                    }
+                ]
+            },
+            {
+                name: "Artículos y Plurales",
+                exercises: [
+                    {
+                        topic: 'Articles - a/an',
+                        question: 'Completa: I have ___ apple.',
+                        answer: 'an',
+                        options: ['a', 'an', 'the', '-'],
+                        explanation: 'Usamos "an" antes de palabras que empiezan con sonido vocal.'
+                    },
+                    {
+                        topic: 'Plural - Irregular',
+                        question: '¿Cuál es el plural de "child"?',
+                        answer: 'children',
+                        options: ['childs', 'children', 'childes', 'child'],
+                        explanation: 'Child es un sustantivo irregular, su plural es "children".'
+                    }
+                ]
+            },
+            {
+                name: "There is / There are",
+                exercises: [
+                    {
+                        topic: 'There is/are - Affirmative',
+                        question: 'Completa: ___ three books on the table.',
+                        answer: 'There are',
+                        options: ['There is', 'There are', 'They are', 'It is'],
+                        explanation: 'Usamos "There are" con sustantivos plurales.'
+                    }
+                ]
+            },
+            {
+                name: "Imperativos",
+                exercises: [
+                    {
+                        topic: 'Imperatives',
+                        question: 'Completa: ___ the door, please.',
+                        answer: 'Close',
+                        options: ['Close', 'Closes', 'Closing', 'To close'],
+                        explanation: 'El imperativo usa el infinitivo sin "to".'
+                    }
+                ]
+            }
+        ]
+    },
+    A2: {
+        blocks: [
+            {
+                name: "Past Simple",
+                exercises: [
+                    {
+                        topic: 'Past Simple - Irregular',
+                        question: 'Completa: Yesterday I ___ (go) to the cinema.',
+                        answer: 'went',
+                        options: ['go', 'goes', 'went', 'going'],
+                        explanation: '"Go" es irregular, su pasado es "went".'
+                    },
+                    {
+                        topic: 'Past Simple - Regular',
+                        question: 'Completa: She ___ (walk) to school yesterday.',
+                        answer: 'walked',
+                        options: ['walk', 'walks', 'walked', 'walking'],
+                        explanation: 'Verbos regulares: añadimos -ed para el pasado.'
+                    }
+                ]
+            },
+            {
+                name: "Future (Going to / Will)",
+                exercises: [
+                    {
+                        topic: 'Future - Going to',
+                        question: 'Completa: I ___ study tonight.',
+                        answer: "am going to",
+                        options: ['am going to', 'will', 'going to', 'go to'],
+                        explanation: 'Usamos "am/is/are going to" para planes decididos.'
+                    },
+                    {
+                        topic: 'Future - Will',
+                        question: 'Completa: I think it ___ rain tomorrow.',
+                        answer: 'will',
+                        options: ['will', 'is going to', 'going', 'is'],
+                        explanation: 'Usamos "will" para predicciones y decisiones espontáneas.'
+                    }
+                ]
+            },
+            {
+                name: "Comparativos",
+                exercises: [
+                    {
+                        topic: 'Comparative - Irregular',
+                        question: 'Completa: This book is ___ than that one.',
+                        answer: 'better',
+                        options: ['good', 'better', 'best', 'more good'],
+                        explanation: '"Good" es irregular: good → better → best.'
+                    }
+                ]
+            },
+            {
+                name: "Verbos Modales (Can/Could/Should)",
+                exercises: [
+                    {
+                        topic: 'Can/Could',
+                        question: 'Completa: ___ you help me?',
+                        answer: 'Could',
+                        options: ['Could', 'Can', 'Should', 'Would'],
+                        explanation: 'Ambos son correctos, pero "Could" es más formal y educado.'
+                    }
+                ]
+            },
+            {
+                name: "Past Continuous",
+                exercises: [
+                    {
+                        topic: 'Past Continuous',
+                        question: 'Completa: I ___ (read) when you called.',
+                        answer: 'was reading',
+                        options: ['read', 'was reading', 'am reading', 'have read'],
+                        explanation: 'Past Continuous: was/were + verbo-ing para acciones en progreso en el pasado.'
+                    }
+                ]
+            }
+        ]
+    },
+    B1: {
+        blocks: [
+            {
+                name: "Present Perfect",
+                exercises: [
+                    {
+                        topic: 'Present Perfect - Experience',
+                        question: 'Completa: I ___ (visit) Paris three times.',
+                        answer: 'have visited',
+                        options: ['visited', 'have visited', 'visit', 'am visiting'],
+                        explanation: 'Present Perfect: have/has + participio pasado. Se usa para experiencias sin tiempo específico.'
+                    },
+                    {
+                        topic: 'Present Perfect - Just',
+                        question: 'Completa: She has ___ arrived.',
+                        answer: 'just',
+                        options: ['just', 'yet', 'already', 'never'],
+                        explanation: '"Just" = hace muy poco tiempo, va entre has/have y el participio.'
+                    }
+                ]
+            },
+            {
+                name: "Voz Pasiva",
+                exercises: [
+                    {
+                        topic: 'Passive Voice - Past',
+                        question: 'Completa: The book ___ (write) in 1990.',
+                        answer: 'was written',
+                        options: ['wrote', 'was written', 'is written', 'has written'],
+                        explanation: 'Pasiva en pasado: was/were + participio pasado.'
+                    }
+                ]
+            },
+            {
+                name: "Condicionales (Tipo 1 y 2)",
+                exercises: [
+                    {
+                        topic: 'Conditionals - Type 1',
+                        question: 'Completa: If it ___ (rain), I will stay home.',
+                        answer: 'rains',
+                        options: ['rain', 'rains', 'will rain', 'rained'],
+                        explanation: 'Condicional tipo 1: If + presente simple, ... will + infinitivo.'
+                    },
+                    {
+                        topic: 'Conditionals - Type 2',
+                        question: 'Completa: If I ___ (be) rich, I would travel.',
+                        answer: 'were',
+                        options: ['am', 'was', 'were', 'be'],
+                        explanation: 'Condicional tipo 2: If + pasado simple. Con "I/he/she/it" preferimos "were".'
+                    }
+                ]
+            },
+            {
+                name: "Estilo Indirecto",
+                exercises: [
+                    {
+                        topic: 'Reported Speech',
+                        question: 'He said, "I am tired". → He said he ___ tired.',
+                        answer: 'was',
+                        options: ['is', 'was', 'were', 'am'],
+                        explanation: 'En estilo indirecto, presente → pasado: am → was.'
+                    }
+                ]
+            },
+            {
+                name: "Oraciones de Relativo",
+                exercises: [
+                    {
+                        topic: 'Relative Clauses - Who',
+                        question: 'The man ___ lives here is my uncle.',
+                        answer: 'who',
+                        options: ['who', 'which', 'where', 'what'],
+                        explanation: 'Usamos "who" para personas en oraciones de relativo.'
+                    }
+                ]
+            }
+        ]
+    },
+    B2: {
+        blocks: [
+            {
+                name: "Past Perfect",
+                exercises: [
+                    {
+                        topic: 'Past Perfect',
+                        question: 'When I arrived, they ___ already ___ (leave).',
+                        answer: 'had left',
+                        options: ['left', 'have left', 'had left', 'were leaving'],
+                        explanation: 'Past Perfect: had + participio. Acción pasada antes de otra acción pasada.'
+                    }
+                ]
+            },
+            {
+                name: "Modales Perfectos",
+                exercises: [
+                    {
+                        topic: 'Modal Perfects - Should have',
+                        question: 'He ___ have studied harder (crítica al pasado).',
+                        answer: 'should',
+                        options: ['should', 'must', 'can', 'will'],
+                        explanation: 'Should have + participio = crítica o consejo sobre el pasado.'
+                    }
+                ]
+            },
+            {
+                name: "Condicional Tipo 3",
+                exercises: [
+                    {
+                        topic: 'Conditionals - Type 3',
+                        question: 'If I ___ (know), I would have told you.',
+                        answer: 'had known',
+                        options: ['knew', 'had known', 'know', 'have known'],
+                        explanation: 'Condicional tipo 3: If + past perfect, ... would have + participio.'
+                    }
+                ]
+            },
+            {
+                name: "Wish + Pasado",
+                exercises: [
+                    {
+                        topic: 'Wish + Past',
+                        question: 'I wish I ___ (can) speak French.',
+                        answer: 'could',
+                        options: ['can', 'could', 'will', 'would'],
+                        explanation: 'Wish + pasado simple para deseos sobre el presente. Can → could.'
+                    }
+                ]
+            },
+            {
+                name: "Pasiva Avanzada",
+                exercises: [
+                    {
+                        topic: 'Passive - Advanced',
+                        question: 'The car needs ___ (repair).',
+                        answer: 'repairing',
+                        options: ['repair', 'repairing', 'to repair', 'repaired'],
+                        explanation: 'Need + -ing tiene significado pasivo.'
+                    }
+                ]
+            }
+        ]
+    },
+    C1: {
+        blocks: [
+            {
+                name: "Inversión",
+                exercises: [
+                    {
+                        topic: 'Inversion',
+                        question: '___ have I seen such a beautiful view.',
+                        answer: 'Never',
+                        options: ['Never', 'Not', 'No', 'Neither'],
+                        explanation: 'Después de palabras negativas usamos inversión (verbo + sujeto).'
+                    }
+                ]
+            },
+            {
+                name: "Subjuntivo",
+                exercises: [
+                    {
+                        topic: 'Subjunctive',
+                        question: 'It is essential that he ___ present.',
+                        answer: 'be',
+                        options: ['is', 'be', 'was', 'were'],
+                        explanation: 'En inglés formal, después de "essential/vital/important that" usamos subjuntivo (be).'
+                    }
+                ]
+            },
+            {
+                name: "Condicionales Mixtos",
+                exercises: [
+                    {
+                        topic: 'Mixed Conditionals',
+                        question: 'If I had studied harder (past), I ___ be a doctor now (present).',
+                        answer: 'would',
+                        options: ['will', 'would', 'had', 'have'],
+                        explanation: 'Condicional mixto: pasado → presente. If + past perfect, ... would + infinitivo.'
+                    }
+                ]
+            },
+            {
+                name: "Cleft Sentences",
+                exercises: [
+                    {
+                        topic: 'Cleft Sentences',
+                        question: '___ I need is some rest.',
+                        answer: 'What',
+                        options: ['What', 'That', 'Which', 'Who'],
+                        explanation: 'Cleft sentence para énfasis: "What I need" = "The thing that I need".'
+                    }
+                ]
+            },
+            {
+                name: "Participios",
+                exercises: [
+                    {
+                        topic: 'Participle Clauses',
+                        question: '___ (finish) my work, I went home.',
+                        answer: 'Having finished',
+                        options: ['Finishing', 'Having finished', 'Finished', 'To finish'],
+                        explanation: 'Having + participio indica una acción completada antes de otra.'
+                    }
+                ]
+            }
+        ]
+    }
 };
 
 const vocabularyDB = {
-    A1: [
-        { en: 'red', es: 'rojo', example: 'The apple is red.', category: 'colors' },
-        { en: 'blue', es: 'azul', example: 'The sky is blue.', category: 'colors' },
-        { en: 'family', es: 'familia', example: 'I love my family.', category: 'family' },
-        { en: 'mother', es: 'madre', example: 'My mother is kind.', category: 'family' },
-        { en: 'father', es: 'padre', example: 'My father works hard.', category: 'family' },
-        { en: 'water', es: 'agua', example: 'I drink water every day.', category: 'food' },
-        { en: 'bread', es: 'pan', example: 'I eat bread for breakfast.', category: 'food' },
-        { en: 'house', es: 'casa', example: 'I live in a big house.', category: 'places' },
-        { en: 'school', es: 'escuela', example: 'I go to school every day.', category: 'places' },
-        { en: 'book', es: 'libro', example: 'I read a book before bed.', category: 'objects' }
-    ],
-    A2: [
-        { en: 'weather', es: 'clima', example: 'The weather is nice today.', category: 'nature' },
-        { en: 'journey', es: 'viaje', example: 'The journey was long.', category: 'travel' },
-        { en: 'experience', es: 'experiencia', example: 'It was a great experience.', category: 'abstract' },
-        { en: 'difference', es: 'diferencia', example: "There's a big difference.", category: 'abstract' },
-        { en: 'opportunity', es: 'oportunidad', example: "It's a good opportunity.", category: 'abstract' }
-    ],
-    B1: [
-        { en: 'achieve', es: 'lograr', example: 'I want to achieve my goals.', category: 'verbs' },
-        { en: 'decrease', es: 'disminuir', example: 'Sales decreased last month.', category: 'verbs' },
-        { en: 'environment', es: 'medio ambiente', example: 'We must protect the environment.', category: 'nature' },
-        { en: 'society', es: 'sociedad', example: 'Society is changing rapidly.', category: 'abstract' },
-        { en: 'benefit', es: 'beneficio', example: 'Exercise has many benefits.', category: 'abstract' }
-    ],
-    B2: [
-        { en: 'strengthen', es: 'fortalecer', example: 'We need to strengthen our relationship.', category: 'verbs' },
-        { en: 'underestimate', es: 'subestimar', example: "Don't underestimate the challenge.", category: 'verbs' },
-        { en: 'comprehensive', es: 'completo/exhaustivo', example: 'A comprehensive study was conducted.', category: 'adjectives' },
-        { en: 'controversy', es: 'controversia', example: 'The decision sparked controversy.', category: 'abstract' },
-        { en: 'phenomenon', es: 'fenómeno', example: "It's an interesting phenomenon.", category: 'abstract' }
-    ],
-    C1: [
-        { en: 'exacerbate', es: 'agravar/empeorar', example: 'This will exacerbate the problem.', category: 'verbs' },
-        { en: 'scrutinize', es: 'escudriñar/examinar', example: 'They scrutinized the evidence.', category: 'verbs' },
-        { en: 'ambiguous', es: 'ambiguo', example: 'His response was ambiguous.', category: 'adjectives' },
-        { en: 'resilience', es: 'resiliencia', example: 'She showed great resilience.', category: 'abstract' },
-        { en: 'paradigm', es: 'paradigma', example: 'A new paradigm is emerging.', category: 'abstract' }
-    ]
+    A1: {
+        blocks: [
+            {
+                name: "Colores",
+                words: [
+                    { en: 'red', es: 'rojo', example: 'The apple is red.', category: 'colors' },
+                    { en: 'blue', es: 'azul', example: 'The sky is blue.', category: 'colors' },
+                    { en: 'green', es: 'verde', example: 'The grass is green.', category: 'colors' },
+                    { en: 'yellow', es: 'amarillo', example: 'The sun is yellow.', category: 'colors' },
+                    { en: 'black', es: 'negro', example: 'My car is black.', category: 'colors' }
+                ]
+            },
+            {
+                name: "Familia",
+                words: [
+                    { en: 'family', es: 'familia', example: 'I love my family.', category: 'family' },
+                    { en: 'mother', es: 'madre', example: 'My mother is kind.', category: 'family' },
+                    { en: 'father', es: 'padre', example: 'My father works hard.', category: 'family' },
+                    { en: 'sister', es: 'hermana', example: 'I have one sister.', category: 'family' },
+                    { en: 'brother', es: 'hermano', example: 'My brother is tall.', category: 'family' }
+                ]
+            },
+            {
+                name: "Comida y bebida",
+                words: [
+                    { en: 'water', es: 'agua', example: 'I drink water every day.', category: 'food' },
+                    { en: 'bread', es: 'pan', example: 'I eat bread for breakfast.', category: 'food' },
+                    { en: 'apple', es: 'manzana', example: 'An apple a day keeps the doctor away.', category: 'food' },
+                    { en: 'coffee', es: 'café', example: 'I drink coffee in the morning.', category: 'food' },
+                    { en: 'milk', es: 'leche', example: 'The baby drinks milk.', category: 'food' }
+                ]
+            },
+            {
+                name: "Lugares",
+                words: [
+                    { en: 'house', es: 'casa', example: 'I live in a big house.', category: 'places' },
+                    { en: 'school', es: 'escuela', example: 'I go to school every day.', category: 'places' },
+                    { en: 'park', es: 'parque', example: 'Children play in the park.', category: 'places' },
+                    { en: 'hospital', es: 'hospital', example: 'Doctors work in a hospital.', category: 'places' }
+                ]
+            },
+            {
+                name: "Objetos cotidianos",
+                words: [
+                    { en: 'book', es: 'libro', example: 'I read a book before bed.', category: 'objects' },
+                    { en: 'table', es: 'mesa', example: 'The book is on the table.', category: 'objects' },
+                    { en: 'chair', es: 'silla', example: 'Sit on the chair.', category: 'objects' },
+                    { en: 'phone', es: 'teléfono', example: 'My phone is ringing.', category: 'objects' }
+                ]
+            }
+        ]
+    },
+    A2: {
+        blocks: [
+            {
+                name: "Clima y naturaleza",
+                words: [
+                    { en: 'weather', es: 'clima', example: 'The weather is nice today.', category: 'nature' },
+                    { en: 'rain', es: 'lluvia', example: "It's going to rain tomorrow.", category: 'nature' },
+                    { en: 'sun', es: 'sol', example: 'The sun is shining.', category: 'nature' },
+                    { en: 'cloud', es: 'nube', example: 'The sky is full of clouds.', category: 'nature' }
+                ]
+            },
+            {
+                name: "Viajes y transporte",
+                words: [
+                    { en: 'journey', es: 'viaje', example: 'The journey was long.', category: 'travel' },
+                    { en: 'train', es: 'tren', example: 'I travel by train.', category: 'travel' },
+                    { en: 'bus', es: 'autobús', example: 'The bus arrives at 9am.', category: 'travel' },
+                    { en: 'ticket', es: 'billete', example: 'I bought a ticket.', category: 'travel' }
+                ]
+            },
+            {
+                name: "Emociones básicas",
+                words: [
+                    { en: 'happy', es: 'feliz', example: 'I am very happy today.', category: 'emotions' },
+                    { en: 'sad', es: 'triste', example: 'She feels sad.', category: 'emotions' },
+                    { en: 'angry', es: 'enfadado', example: 'He was angry yesterday.', category: 'emotions' },
+                    { en: 'tired', es: 'cansado', example: 'I am tired after work.', category: 'emotions' }
+                ]
+            },
+            {
+                name: "Palabras abstractas",
+                words: [
+                    { en: 'experience', es: 'experiencia', example: 'It was a great experience.', category: 'abstract' },
+                    { en: 'difference', es: 'diferencia', example: "There's a big difference.", category: 'abstract' },
+                    { en: 'opportunity', es: 'oportunidad', example: "It's a good opportunity.", category: 'abstract' }
+                ]
+            }
+        ]
+    },
+    B1: {
+        blocks: [
+            {
+                name: "Verbos de acción",
+                words: [
+                    { en: 'achieve', es: 'lograr', example: 'I want to achieve my goals.', category: 'verbs' },
+                    { en: 'decrease', es: 'disminuir', example: 'Sales decreased last month.', category: 'verbs' },
+                    { en: 'increase', es: 'aumentar', example: 'Prices are increasing.', category: 'verbs' },
+                    { en: 'improve', es: 'mejorar', example: 'We need to improve quality.', category: 'verbs' }
+                ]
+            },
+            {
+                name: "Medio ambiente",
+                words: [
+                    { en: 'environment', es: 'medio ambiente', example: 'We must protect the environment.', category: 'nature' },
+                    { en: 'pollution', es: 'contaminación', example: 'Air pollution is a problem.', category: 'nature' },
+                    { en: 'recycle', es: 'reciclar', example: 'We should recycle more.', category: 'nature' }
+                ]
+            },
+            {
+                name: "Sociedad y abstractos",
+                words: [
+                    { en: 'society', es: 'sociedad', example: 'Society is changing rapidly.', category: 'abstract' },
+                    { en: 'benefit', es: 'beneficio', example: 'Exercise has many benefits.', category: 'abstract' },
+                    { en: 'challenge', es: 'desafío', example: 'This is a big challenge.', category: 'abstract' }
+                ]
+            }
+        ]
+    },
+    B2: {
+        blocks: [
+            {
+                name: "Verbos avanzados",
+                words: [
+                    { en: 'strengthen', es: 'fortalecer', example: 'We need to strengthen our relationship.', category: 'verbs' },
+                    { en: 'underestimate', es: 'subestimar', example: "Don't underestimate the challenge.", category: 'verbs' },
+                    { en: 'overcome', es: 'superar', example: 'She overcame many obstacles.', category: 'verbs' }
+                ]
+            },
+            {
+                name: "Adjetivos descriptivos",
+                words: [
+                    { en: 'comprehensive', es: 'completo/exhaustivo', example: 'A comprehensive study was conducted.', category: 'adjectives' },
+                    { en: 'significant', es: 'significativo', example: 'There was a significant change.', category: 'adjectives' },
+                    { en: 'crucial', es: 'crucial', example: 'This is a crucial moment.', category: 'adjectives' }
+                ]
+            },
+            {
+                name: "Conceptos abstractos",
+                words: [
+                    { en: 'controversy', es: 'controversia', example: 'The decision sparked controversy.', category: 'abstract' },
+                    { en: 'phenomenon', es: 'fenómeno', example: "It's an interesting phenomenon.", category: 'abstract' }
+                ]
+            }
+        ]
+    },
+    C1: {
+        blocks: [
+            {
+                name: "Verbos formales",
+                words: [
+                    { en: 'exacerbate', es: 'agravar/empeorar', example: 'This will exacerbate the problem.', category: 'verbs' },
+                    { en: 'scrutinize', es: 'escudriñar/examinar', example: 'They scrutinized the evidence.', category: 'verbs' },
+                    { en: 'mitigate', es: 'mitigar', example: 'We must mitigate the risks.', category: 'verbs' }
+                ]
+            },
+            {
+                name: "Adjetivos académicos",
+                words: [
+                    { en: 'ambiguous', es: 'ambiguo', example: 'His response was ambiguous.', category: 'adjectives' },
+                    { en: 'substantial', es: 'sustancial', example: 'There was substantial progress.', category: 'adjectives' }
+                ]
+            },
+            {
+                name: "Conceptos complejos",
+                words: [
+                    { en: 'resilience', es: 'resiliencia', example: 'She showed great resilience.', category: 'abstract' },
+                    { en: 'paradigm', es: 'paradigma', example: 'A new paradigm is emerging.', category: 'abstract' }
+                ]
+            }
+        ]
+    }
 };
 
 // Estado de la aplicación
@@ -326,12 +650,150 @@ function switchTab(tabName) {
 
 // Seleccionar nivel
 let selectedLevel = 'A1';
+let selectedBlocks = { grammar: [], vocabulary: [] };
+
 function selectLevel(level) {
     selectedLevel = level;
-    document.querySelectorAll('.diff-btn').forEach(btn => {
+    document.querySelectorAll('.diff-btn[data-level]').forEach(btn => {
         btn.classList.remove('selected');
     });
     event.target.classList.add('selected');
+    
+    // Actualizar bloques disponibles si estamos en modo personalizado
+    if (!document.getElementById('custom-practice').classList.contains('hidden')) {
+        loadAvailableBlocks();
+    }
+}
+
+function selectPracticeType(type) {
+    document.querySelectorAll('.diff-btn[data-type]').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    event.target.classList.add('selected');
+    
+    if (type === 'quick') {
+        document.getElementById('quick-practice').classList.remove('hidden');
+        document.getElementById('custom-practice').classList.add('hidden');
+    } else {
+        document.getElementById('quick-practice').classList.add('hidden');
+        document.getElementById('custom-practice').classList.remove('hidden');
+        loadAvailableBlocks();
+    }
+}
+
+function loadAvailableBlocks() {
+    selectedBlocks = { grammar: [], vocabulary: [] };
+    
+    // Cargar bloques de gramática
+    const grammarContainer = document.getElementById('grammar-blocks');
+    const grammarBlocks = grammarDB[selectedLevel]?.blocks || [];
+    
+    grammarContainer.innerHTML = grammarBlocks.map((block, index) => {
+        const exerciseCount = block.exercises.length;
+        return `
+            <label class="block-checkbox" data-type="grammar" data-index="${index}">
+                <input type="checkbox" onchange="toggleBlock('grammar', ${index}, this.checked)">
+                <div class="block-label">
+                    <div class="block-topic">${block.name}</div>
+                    <div class="block-count">${exerciseCount} ejercicio${exerciseCount > 1 ? 's' : ''}</div>
+                </div>
+            </label>
+        `;
+    }).join('');
+    
+    // Cargar bloques de vocabulario
+    const vocabularyContainer = document.getElementById('vocabulary-blocks');
+    const vocabularyBlocks = vocabularyDB[selectedLevel]?.blocks || [];
+    
+    vocabularyContainer.innerHTML = vocabularyBlocks.map((block, index) => {
+        const wordCount = block.words.length;
+        return `
+            <label class="block-checkbox" data-type="vocabulary" data-index="${index}">
+                <input type="checkbox" onchange="toggleBlock('vocabulary', ${index}, this.checked)">
+                <div class="block-label">
+                    <div class="block-topic">${block.name}</div>
+                    <div class="block-count">${wordCount} palabra${wordCount > 1 ? 's' : ''}</div>
+                </div>
+            </label>
+        `;
+    }).join('');
+    
+    updateStartButton();
+}
+
+function toggleBlock(type, index, checked) {
+    const checkbox = event.target.closest('.block-checkbox');
+    
+    if (checked) {
+        selectedBlocks[type].push(index);
+        checkbox.classList.add('checked');
+    } else {
+        selectedBlocks[type] = selectedBlocks[type].filter(i => i !== index);
+        checkbox.classList.remove('checked');
+    }
+    
+    updateStartButton();
+}
+
+function updateStartButton() {
+    const btn = document.getElementById('start-custom-btn');
+    const totalSelected = selectedBlocks.grammar.length + selectedBlocks.vocabulary.length;
+    
+    if (totalSelected > 0) {
+        btn.disabled = false;
+        btn.textContent = `Comenzar (${totalSelected} bloque${totalSelected > 1 ? 's' : ''} seleccionado${totalSelected > 1 ? 's' : ''})`;
+    } else {
+        btn.disabled = true;
+        btn.textContent = 'Comenzar práctica personalizada';
+    }
+}
+
+function startCustomPractice() {
+    const exercises = [];
+    
+    // Añadir ejercicios de gramática seleccionados
+    selectedBlocks.grammar.forEach(blockIndex => {
+        const block = grammarDB[selectedLevel].blocks[blockIndex];
+        exercises.push(...block.exercises);
+    });
+    
+    // Añadir ejercicios de vocabulario seleccionados
+    selectedBlocks.vocabulary.forEach(blockIndex => {
+        const block = vocabularyDB[selectedLevel].blocks[blockIndex];
+        const vocabExercises = block.words.map(word => ({
+            type: 'vocabulary',
+            question: `¿Qué significa "${word.en}"?`,
+            answer: word.es,
+            word: word,
+            options: generateVocabOptionsFromBlock(word, block.words)
+        }));
+        exercises.push(...vocabExercises);
+    });
+    
+    if (exercises.length === 0) return;
+    
+    // Mezclar y limitar ejercicios
+    const shuffled = exercises.sort(() => Math.random() - 0.5);
+    const finalExercises = shuffled.slice(0, Math.min(10, shuffled.length));
+    
+    const container = document.getElementById('practice-session');
+    const selection = document.getElementById('practice-selection');
+    
+    selection.classList.add('hidden');
+    container.classList.remove('hidden');
+    
+    renderExercises(container, finalExercises);
+}
+
+function generateVocabOptionsFromBlock(correctWord, blockWords) {
+    const wrongOptions = blockWords
+        .filter(w => w.en !== correctWord.en)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3)
+        .map(w => w.es);
+    
+    const options = [correctWord.es, ...wrongOptions];
+    return options.sort(() => Math.random() - 0.5);
 }
 
 // Iniciar práctica diaria
@@ -352,28 +814,31 @@ function startPractice(type) {
     let exercises = [];
     
     if (type === 'grammar' || type === 'mixed') {
-        exercises = exercises.concat(grammarDB[selectedLevel] || []);
+        const allGrammarExercises = (grammarDB[selectedLevel]?.blocks || [])
+            .flatMap(block => block.exercises);
+        exercises = exercises.concat(allGrammarExercises);
     }
     
     if (type === 'vocabulary' || type === 'mixed') {
-        const vocabExercises = (vocabularyDB[selectedLevel] || []).map(word => ({
+        const allWords = (vocabularyDB[selectedLevel]?.blocks || [])
+            .flatMap(block => block.words);
+        const vocabExercises = allWords.map(word => ({
             type: 'vocabulary',
             question: `¿Qué significa "${word.en}"?`,
             answer: word.es,
             word: word,
-            options: generateVocabOptions(word, selectedLevel)
+            options: generateVocabOptions(word, allWords)
         }));
         exercises = exercises.concat(vocabExercises);
     }
     
     // Mezclar ejercicios
-    exercises = exercises.sort(() => Math.random() - 0.5).slice(0, 5);
+    exercises = exercises.sort(() => Math.random() - 0.5).slice(0, 10);
     
     renderExercises(container, exercises);
 }
 
-function generateVocabOptions(word, level) {
-    const allWords = vocabularyDB[level] || [];
+function generateVocabOptions(word, allWords) {
     const wrongOptions = allWords
         .filter(w => w.en !== word.en)
         .sort(() => Math.random() - 0.5)
@@ -528,7 +993,10 @@ function loadVocabularyList() {
         return;
     }
     
-    const allWords = Object.values(vocabularyDB).flat();
+    const allWords = Object.values(vocabularyDB)
+        .flatMap(level => level.blocks)
+        .flatMap(block => block.words);
+    
     const learnedWordObjects = words.map(w => 
         allWords.find(word => word.en === w)
     ).filter(Boolean);
