@@ -215,7 +215,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 <div id="app">
 
 <!-- ONBOARDING -->
-<div class="screen active" id="screen-onboard">
+<div class="screen" id="screen-onboard">
   <div class="scroll-area" style="padding-bottom:40px">
     <div class="onboard-hero">
       <div class="onboard-logo">English<br>Master</div>
@@ -406,7 +406,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);fon
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
-  <button class="nav-btn active" onclick="showScreen('screen-home',this)"><div class="nav-icon">🏠</div><div class="nav-label">Inicio</div></button>
+  <button class="nav-btn active" onclick="renderHome();showScreen('screen-home',this)"><div class="nav-icon">🏠</div><div class="nav-label">Inicio</div></button>
   <button class="nav-btn" onclick="showScreen('screen-lessons',this);renderLessons()"><div class="nav-icon">📖</div><div class="nav-label">Lecciones</div></button>
   <button class="nav-btn" onclick="showScreen('screen-practice',this);renderPracticeSetup()"><div class="nav-icon">✏️</div><div class="nav-label">Practicar</div></button>
   <button class="nav-btn" onclick="showScreen('screen-vocab',this);renderVocabList()"><div class="nav-icon">💬</div><div class="nav-label">Vocabulario</div></button>
@@ -934,6 +934,7 @@ function finishOnboarding(){
   state.practiceLevel = state.level;
   saveState();
   renderHome();
+  document.querySelector('.bottom-nav').style.display = 'flex';
   showScreen('screen-home');
   document.querySelectorAll('.nav-btn')[0].classList.add('active');
 }
@@ -993,6 +994,7 @@ function confirmDiagLevel(level){
   state.practiceLevel = level;
   saveState();
   renderHome();
+  document.querySelector('.bottom-nav').style.display = 'flex';
   showScreen('screen-home');
   document.querySelectorAll('.nav-btn')[0].classList.add('active');
 }
@@ -1504,7 +1506,10 @@ loadState();
 if(state.onboarded){
   renderHome();
   showScreen('screen-home');
+  document.querySelectorAll('.nav-btn')[0].classList.add('active');
+  document.querySelector('.bottom-nav').style.display = 'flex';
 } else {
+  document.querySelector('.bottom-nav').style.display = 'none';
   showScreen('screen-onboard');
 }
 </script>
