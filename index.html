@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#378ADD">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="English Master">
+    <link rel="manifest" href="manifest.json">
+    <title>English Master - Aprende Inglés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --primary: #378ADD;
+            --primary-dark: #185FA5;
+            --success: #639922;
+            --warning: #EF9F27;
+            --danger: #E24B4A;
+            --bg: #F9F9F9;
+            --card: #FFFFFF;
+            --text: #2C2C2A;
+            --text-secondary: #5F5E5A;
+            --border: #E0E0E0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .stats {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .stat-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .container {
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 12px;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: #E6F1FB;
+            color: var(--primary);
+        }
+
+        .btn-secondary:active {
+            background: #B5D4F4;
+        }
+
+        .exercise-card {
+            background: linear-gradient(135deg, #E6F1FB 0%, #B5D4F4 100%);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .exercise-question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--primary-dark);
+        }
+
+        .exercise-text {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            padding: 14px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        .option-btn.correct {
+            background: #EAF3DE;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: #FCEBEB;
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .feedback {
+            padding: 14px;
+            border-radius: 10px;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .feedback.correct {
+            background: #EAF3DE;
+            color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: #FCEBEB;
+            color: var(--danger);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .tab-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 11px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+        }
+
+        .tab-icon {
+            font-size: 24px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .level-a1 { background: #EAF3DE; color: #639922; }
+        .level-a2 { background: #EEEDFE; color: #7F77DD; }
+        .level-b1 { background: #FAECE7; color: #D85A30; }
+        .level-b2 { background: #FBEAF0; color: #D4537E; }
+        .level-c1 { background: #E6F1FB; color: #378ADD; }
+
+        .streak-container {
+            display: flex;
+            gap: 4px;
+            margin-top: 12px;
+        }
+
+        .streak-day {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .streak-day.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .streak-day.today {
+            border: 2px solid var(--primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .vocabulary-item {
+            padding: 12px;
+            border-left: 3px solid var(--primary);
+            background: #F8FAFB;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+
+        .word-en {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+
+        .word-es {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .word-example {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text);
+            margin-top: 6px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .difficulty-selector {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .diff-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--border);
+            background: white;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .diff-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --card: #2a2a2a;
+                --text: #e0e0e0;
+                --text-secondary: #a0a0a0;
+                --border: #404040;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎯 English Master</h1>
+        <div class="stats">
+            <div class="stat-badge">
+                <span>🔥</span>
+                <span id="streak">0</span>
+            </div>
+            <div class="stat-badge">
+                <span>⭐</span>
+                <span id="points">0</span>
+            </div>
+            <div class="stat-badge">
+                <span>📊</span>
+                <span id="level">A1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Tab -->
+    <div id="tab-home" class="tab-content">
+        <div class="container">
+            <div class="card">
+                <h2>📅 Tu práctica diaria</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="daily-progress" style="width: 0%"></div>
+                </div>
+                <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 12px;">
+                    <span id="exercises-done">0</span> de 10 ejercicios completados hoy
+                </p>
+                <button class="btn" onclick="startDailyPractice()">Comenzar práctica 🚀</button>
+            </div>
+
+            <div class="card">
+                <h2>🔥 Racha actual</h2>
+                <div class="streak-container" id="streak-calendar"></div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px;">
+                    ¡Mantén tu racha estudiando cada día!
+                </p>
+            </div>
+
+            <div class="card">
+                <h2>📈 Tu progreso</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+                    <div style="text-align: center; padding: 16px; background: #EAF3DE; border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 600; color: var(--success);" id="vocab-learned">0</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Palabras aprendidas</div>
+                    </div>
+                    <div style="text-align: center; padding: 16px; background: #E6F1FB; border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 600; color: var(--primary);" id="grammar-mastered">0</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">Estructuras dominadas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice Tab -->
+    <div id="tab-practice" class="tab-content hidden">
+        <div class="container">
+            <div id="practice-selection">
+                <div class="card">
+                    <h2>Selecciona tu nivel</h2>
+                    <div class="difficulty-selector">
+                        <button class="diff-btn selected" data-level="A1" onclick="selectLevel('A1')">A1</button>
+                        <button class="diff-btn" data-level="A2" onclick="selectLevel('A2')">A2</button>
+                        <button class="diff-btn" data-level="B1" onclick="selectLevel('B1')">B1</button>
+                        <button class="diff-btn" data-level="B2" onclick="selectLevel('B2')">B2</button>
+                        <button class="diff-btn" data-level="C1" onclick="selectLevel('C1')">C1</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>¿Qué quieres practicar?</h2>
+                    <button class="btn" onclick="startPractice('grammar')">📚 Gramática</button>
+                    <button class="btn btn-secondary" onclick="startPractice('vocabulary')">💬 Vocabulario</button>
+                    <button class="btn btn-secondary" onclick="startPractice('mixed')">🎲 Mixto</button>
+                </div>
+            </div>
+
+            <div id="practice-session" class="hidden"></div>
+        </div>
+    </div>
+
+    <!-- Vocabulary Tab -->
+    <div id="tab-vocabulary" class="tab-content hidden">
+        <div class="container">
+            <div class="card">
+                <h2>📖 Tu vocabulario</h2>
+                <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+                    Revisa las palabras que has aprendido
+                </p>
+                <input type="text" id="vocab-search" class="answer-input" placeholder="Buscar palabra..." oninput="searchVocabulary()">
+            </div>
+            <div id="vocabulary-list"></div>
+        </div>
+    </div>
+
+    <!-- Stats Tab -->
+    <div id="tab-stats" class="tab-content hidden">
+        <div class="container">
+            <div class="card">
+                <h2>📊 Estadísticas</h2>
+                <div style="margin-top: 16px;">
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                            <span style="font-size: 14px; font-weight: 600;">Precisión general</span>
+                            <span style="font-size: 14px; font-weight: 600; color: var(--primary);" id="accuracy">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="accuracy-bar" style="width: 0%; background: var(--primary);"></div>
+                        </div>
+                    </div>
+
+                    <div style="background: #F8FAFB; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                        <h3 style="font-size: 15px; margin-bottom: 12px;">Actividad semanal</h3>
+                        <div id="weekly-activity"></div>
+                    </div>
+
+                    <div style="background: #F8FAFB; padding: 16px; border-radius: 8px;">
+                        <h3 style="font-size: 15px; margin-bottom: 12px;">Próximas revisiones</h3>
+                        <p style="font-size: 13px; color: var(--text-secondary);" id="next-review">
+                            Cargando...
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Tus mejores áreas</h2>
+                <div id="strengths-list"></div>
+            </div>
+
+            <div class="card">
+                <h2>💪 Áreas de mejora</h2>
+                <div id="weaknesses-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('home')">
+            <span class="tab-icon">🏠</span>
+            <span>Inicio</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('practice')">
+            <span class="tab-icon">✏️</span>
+            <span>Practicar</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('vocabulary')">
+            <span class="tab-icon">📖</span>
+            <span>Vocabulario</span>
+        </button>
+        <button class="tab-btn" onclick="switchTab('stats')">
+            <span class="tab-icon">📊</span>
+            <span>Progreso</span>
+        </button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
